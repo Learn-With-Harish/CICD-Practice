@@ -45,4 +45,8 @@ jobs:
         args: |
           -Dsonar.projectKey=hariharan-somasundharam_CICD-Practice
           -Dsonar.organization=hariharan-somasundharam
+          -Dsonar.projectName=CICD-Practice
           -Dsonar.java.binaries=target/classes
+          -Dsonar.sources=src/main/java
+          -Dsonar.tests=src/test/java
+          -Dsonar.sourceEncoding=UTF-8
