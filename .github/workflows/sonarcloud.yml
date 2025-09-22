@@ -30,11 +30,4 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        args: >
-          -Dsonar.projectKey=hariharan-somasundharam_CICD-Practice
-          -Dsonar.organization=hariharan-somasundharam
-          -Dsonar.java.binaries=target/classes
-          -Dsonar.sources=src/main/java
-          -Dsonar.tests=src/test/java
-          -Dsonar.sourceEncoding=UTF-8
+      # No 'args' needed when using sonar-project.properties file
