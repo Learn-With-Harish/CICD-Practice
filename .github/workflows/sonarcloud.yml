@@ -20,32 +20,20 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        cache: maven  # This caches dependencies for faster runs
+        cache: maven
 
-    - name: Cache Maven dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          maven-
-
-    - name: Build and test with Maven
-      run: |
-        mvn -B dependency:go-offline --file pom.xml
-        mvn -B verify --file pom.xml
-      timeout-minutes: 10  # Add timeout to prevent hanging
+    - name: Build with Maven
+      run: mvn -B verify --file pom.xml
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarqube-scan-action@v5.0.0
       env:
-        GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        args: |
+        args: >
           -Dsonar.projectKey=hariharan-somasundharam_CICD-Practice
           -Dsonar.organization=hariharan-somasundharam
-          -Dsonar.projectName=CICD-Practice
           -Dsonar.java.binaries=target/classes
           -Dsonar.sources=src/main/java
           -Dsonar.tests=src/test/java
