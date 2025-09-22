@@ -28,5 +28,15 @@ jobs:
     - name: SonarCloud Scan
       uses: SonarSource/sonarqube-scan-action@v5.0.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      with:
+        args: |
+          -Dsonar.projectKey=hariharan-somasundharam_CICD-Practice
+          -Dsonar.organization=hariharan-somasundharam
+          -Dsonar.projectName=CICD-Practice
+          -Dsonar.java.binaries=target/classes
+          -Dsonar.sources=src/main/java
+          -Dsonar.tests=src/test/java
+          -Dsonar.sourceEncoding=UTF-8
